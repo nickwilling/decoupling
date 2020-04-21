@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--    把创建对象交给-spring管理，需包含唯一标识和要反射创建的类名-->
+<bean id="accountService" class="com.wwl.service.impl.AccountServiceImpl" scope="prototype"></bean>
+<!--<bean id="accountService" class="com.wwl.service.impl.AccountServiceImpl" scope="prototype"></bean> 创建多例对象-->
+<bean id="accountDao" class="com.wwl.dao.impl.AccountDaoImpl"></bean>
+</beans>

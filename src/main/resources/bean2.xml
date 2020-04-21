@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--把对象的创建交给spring管理-->
+<!--spring对bean的管理细节
+    1、创建bean的三种方式
+    2、bean对象的作用范围
+    3、bean对象的生命周期
+-->
+<!--    第一种方式：使用默认构造函数-->
+    <bean id="accountService" class="com.wwl.service.impl.AccountServiceImpl"></bean>
+
+<!--    第二种方式：某个类没有默认构造函数。比如使用普通工厂中的普通方法创建对象(使用某个类中的普通方法创建对象)，并存入-spring容器-->
+<!--    这样创建出来的bean是一个工厂对象，但我只想要里面的返回值对象accountService-->
+<!--    普通方法执行前需要实例化类，所以要先有工厂类实例以后才能创建工厂类创建的类，必须分为两步-->
+    <bean id="instanceFactory" class="com.wwl.factory.InstanceFactory"></bean>
+    <bean id="accountService2" factory-bean="instanceFactory" factory-method="getAccountService"></bean>
+
+    <!-- 第三种方式：使用工厂中的静态方法创建对象(使用某个类中的静态方法创建对象)，并存入spring容器   -->
+<!--    静态方法不需要实例化类，所以可以直接调用方法-->
+    <bean id="accountService3" class="com.wwl.factory.InstanceFactory" factory-method="getAccountService2"></bean>
+
+<!--bean对象的生命周期：
+        单例对象：
+            出生：当容器创建时对象出生
+            活着：只要容器还在，对象一直活着
+            死亡：容器销毁，对象消亡
+            总结：单例对象的生命周期和容器相同
+        多例对象：
+            出生：使用对象的时候spring为我们创建
+            活着：对象只要是在使用过程中就一直活着
+            死亡：spring容器是不知道多例对象什么时候不用的，当对象长时间不用且没有别的对象引用时，由java的垃圾回收机制销毁
+-->
+</beans>
